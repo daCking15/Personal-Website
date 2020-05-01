@@ -46,6 +46,9 @@ h4{
     background-color: black;
     margin-left: calc(50% - 250px);
 }
+.covidpic{
+    margin-top: 10px;
+}
 .picture{
     margin-left: calc(50% - 91px);
     background-color: black;
