@@ -34,17 +34,17 @@ h4{
 
 /* divs */
 
-.Kojo{
+.kojoFrame{
     margin-left: calc(50% - 330.5px);
     background-color: black;
     width: 661px;
     height: 388px;
 }
-.CovidPic{
-    width: 500px;
-    height: 290px;
+.covidFrame{
+    width: 661px;
+    height: 381px;
     background-color: black;
-    margin-left: calc(50% - 250px);
+    margin-left: calc(50% - 330.5px);
 }
 .covidpic{
     margin-top: 10px;
