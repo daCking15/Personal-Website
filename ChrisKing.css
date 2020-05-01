@@ -26,17 +26,7 @@ h3{
 }
 
 /* divs */
-.covid{
-    text-align: center;
-    margin-left: 20%;
-    background-color: grey;
-    width: 60%;
-}
-.header{
-    margin-left: 20%;
-    background-color: grey;
-    width: 60%;
-}
+
 .Kojo{
     margin-left: calc(50% - 330.5px);
     background-color: black;
@@ -49,15 +39,28 @@ h3{
     width: 182px;
     height: 243px;
 }
+
+/* Grey Divs */
+.header{
+    margin-left: calc(50% - 420.5px);
+    background-color: grey;
+    width: 841px;
+}
 .resume{
     text-align: center;
-    margin-left: 20%;
+    margin-left: calc(50% - 420.5px);
     background-color: grey;
-    width: 60%;
+    width: 841px;
 }
 .vr{
     text-align: center;
-    margin-left: 20%;
+    margin-left: calc(50% - 420.5px);
     background-color: grey;
-    width: 60%;
+    width: 841px;
+}
+.covid{
+    text-align: center;
+    margin-left: calc(50% - 420.5px);
+    background-color: grey;
+    width: 841px;
 }
