@@ -45,6 +45,12 @@ h4{
     background-color: black;
     margin-left: calc(50% - 330.5px);
 }
+.tanksFrame{
+    width: 661px;
+    height: 381px;
+    background-color: black;
+    margin-left: calc(50% - 330.5px);
+}
 .covidpic{
     margin-top: 10px;
 }
@@ -54,29 +60,12 @@ h4{
     width: 182px;
     height: 243px;
 }
-
-/* Grey Divs */
-.header{
+.standardBlock{
+    text-align: center;
     margin-left: calc(50% - 420.5px);
     background-color: grey;
-    width: 841px;
-    text-align: center;
+    width: 841px;    
 }
-.resume{
-    text-align: center;
-    margin-left: calc(50% - 420.5px);
-    background-color: grey;
-    width: 841px;
-}
-.vr{
-    text-align: center;
-    margin-left: calc(50% - 420.5px);
-    background-color: grey;
-    width: 841px;
-}
-.covid{
-    text-align: center;
-    margin-left: calc(50% - 420.5px);
-    background-color: grey;
-    width: 841px;
+.video{
+    margin-top: 10px;
 }
