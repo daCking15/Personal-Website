@@ -25,7 +25,6 @@ h4{
     margin-left: 5%;
 }
 .profilepic{
-    margin-left: 10px;
     margin-top: 10px;
 }
 .kojopic{
@@ -61,6 +60,7 @@ h4{
     margin-left: calc(50% - 420.5px);
     background-color: grey;
     width: 841px;
+    text-align: center;
 }
 .resume{
     text-align: center;
