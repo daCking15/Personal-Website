@@ -26,6 +26,10 @@ body{
     color: lightgrey;
 }
 
+.info p{
+    font-size: 36px
+}
+
 .profile-picture{
   margin-top: 250px;
   margin-left: 100px;

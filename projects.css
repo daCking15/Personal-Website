@@ -52,6 +52,11 @@ body{
     text-decoration: none;
 }
 
+.centered-menu{
+    position: relative;
+    top: 25%;
+}
+
 .menu div div{
     color: white;
     font-size: 1.1vw;
