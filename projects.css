@@ -56,13 +56,6 @@ body{
     color: white;
     font-size: 1.2vw;
     text-decoration: none;
-}
-
-.menu div:hover {
-    background-color: grey;
-}
-
-.menu div{
     border-color: white;
     border-left: hidden;
     border-right: hidden;
@@ -71,6 +64,10 @@ body{
     border-width: 5px;
     padding-bottom: 5%;
     padding-top: 5%;
+}
+
+.menu div:hover {
+    background-color: grey;
 }
 
 .projectTemplate {
