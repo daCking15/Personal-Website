@@ -10,7 +10,17 @@
     <body class="body">
         
         <div class=menu>
-            <a href="index.html">Home Page</a>
+            <div>
+                <a href="index.html">Home Page</a>
+            </div>
+            <div onclick="(          
+                function(){
+                    console.log(window);
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }        
+            )();">
+                EQHUB
+            </div>
             <div onclick="(          
                 function(){
                     window.scrollTo({top: window.innerHeight, behavior: 'smooth'});
