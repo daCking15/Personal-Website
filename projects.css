@@ -1,3 +1,4 @@
+/* HTML Elements */
 body{
     background-color: silver;
     height: 100%;
@@ -7,28 +8,50 @@ body{
     overflow: hidden;
 }
 
-.annotation {
-    border-style: groove;
-    height: 24%;
-    margin-left: 15%;
-    width: 70%;
-    text-align: center;
-}
-
-.annotation div{
-    height: 100%;
-}
-
-.annotation div img{
-    height: 100%;
+.centeredMenu{
+    width: 100%;
+    margin: 0%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .frame {
-    height: 70%;
-    margin-left: 15%;
     margin-top: 1%;
     margin-bottom: 1%;
-    width: 70%;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.github{
+    padding-bottom: 5%;
+    padding-top: 5%;
+    width: 100%;
+    margin: 0%;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-100%);
+}
+.github a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.github:hover{
+    background-color: grey;  
+}
+
+.home{
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+.home a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.home:hover{
+    background-color: grey;  
 }
 
 .html{
@@ -37,122 +60,40 @@ body{
 }
 
 .menu{
-    width: 10%;
+    width: 225px;
     height: 100%;
-    margin-top: 0%;
+    margin: 0%;
     position: fixed;
     background-color: black;
     text-align: center;
     cursor: pointer;
 }
-
-.menu a{
-    color: white;
-    font-size: 1.1vw;
-    text-decoration: none;
-}
-
-.centered-menu{
-    position: relative;
-    top: 25%;
-}
-
 .menu div div{
     color: white;
-    font-size: 1.1vw;
-    text-decoration: none;
-    border-color: white;
-    border-left: hidden;
-    border-right: hidden;
-    border-top: hidden;
-    border-width: 5px;
+    font-size: 20px;
     padding-bottom: 5%;
     padding-top: 5%;
 }
-
 .menu div div:hover {
     background-color: grey;
 }
 
 .projectTemplate {
     height: 100vh;
-    margin-left: 10%;
-    width: 90%;
+    margin-left: 225px;
+    width: calc(100% - 225px);
 }
-
 .projectTemplate:nth-of-type(odd){
     background-color: aqua;
 }
-
 .projectTemplate:nth-of-type(even){
     background-color: lime;
 }
 
-
-a{
-    font-size: 24px
-}
-
-h1{
-    color: black;
+.title{
     text-align: center;
-}
-h2{
-    color: black
-}
-h3{
-    color: black;
-}
-h4{
-    text-align: center;
-}
-
-/* classes */
-.description{
-    width: 90%;
-    margin-left: 5%;
-}
-
-.kojopic{
-    margin-top: 10px;
-}
-
-/* divs */
-
-.kojoFrame{
-    margin-left: calc(50% - 330.5px);
-    background-color: black;
-    width: 661px;
-    height: 388px;
-}
-.covidFrame{
-    width: 661px;
-    height: 381px;
-    background-color: black;
-    margin-left: calc(50% - 330.5px);
-}
-.tanksFrame{
-    width: 661px;
-    height: 381px;
-    background-color: black;
-    margin-left: calc(50% - 330.5px);
-}
-.covidpic{
-    margin-top: 10px;
-}
-.picture{
-    margin-left: calc(50% - 91px);
-    background-color: black;
-    width: 182px;
-    height: 243px;
-}
-.standardBlock{
-    margin-left: 5%;
-    text-align: center;
-    width: 90%;
-    background-color: grey; 
-}
-.video{
-    margin-top: 10px;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0%;
 }
 
