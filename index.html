@@ -1,50 +1,101 @@
 <!DOCTYPE html>
-<meta charset="utf-8"/>
-<html class="html">  
-    
-    <head class="head">
-        <title>Chris King</title>
-        <link rel="stylesheet" href="index.css">
-        <link rel="icon" href="assets/favicon.ico">
-    </head>
-    
-    <body>
-        <div class=container>
-            <div class=name>
-                Christopher James King
-                <div class=info>
-                    <br>
-                    The Ohio State University
-                    <br>
-                    BS Computer Science and Engineering
-                    <br>
-                    Computer Graphics and Game Design
-                    <br>
-                    <br>
-                    <a href="assets/Chris King Development Resume.pdf" download>
-                        Resume
-                    </a>
-                    <br>
-                    <p>
-                        Last Update: 1/24/23
-                    </p>
-                    <a href="projects.html">
-                        Projects
-                    </a>
-                    <p>
-                        Last Update: 12/14/20
-                    </p>
-                    <a href="https://dacking15.github.io/chris-king-creation/">
-                        Chris King Creation
-                    </a>
-                    <p>
-                        Last Update: 1/11/23
-                    </p>
-                </div>
-            </div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chris King</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="assets/favicon.ico" />
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  </head>
+  <body class="min-vh-100">
+    <div class="container-fluid min-vh-100">
+      <div class="row min-vh-100 g-0">
+        <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center border-end pe-md-4 pt-3 pb-5 min-vh-100">
+          <div class="w-100 d-flex justify-content-start mb-4">
+            <a
+              href="assets/Chris King Development Resume.pdf"
+              download
+              class="resume-icon text-decoration-none d-flex align-items-center justify-content-center rounded-circle bg-light border border-primary"
+              title="Download Resume"
+              style="width: 50px; height: 50px;"
+            >
+              <i class="bi bi-file-earmark-text text-primary fs-4"></i>
+            </a>
+          </div>
+          <img src="assets/paws.jpg" alt="Head Shot"
+            class="rounded-circle shadow mb-4"
+            style="width: 150px; height: 150px; object-fit: cover;"
+          />
+          <h1 class="mb-3 h4 fw-bold">Christopher James King</h1>
+          <ul class="list-unstyled text-muted mb-0">
+            <li class="mb-2 d-flex align-items-center justify-content-center gap-2">
+              <img src="assets/Block O.png" 
+                   alt="Ohio State Logo" 
+                   style="width: 24px; height: 24px; object-fit: contain;">
+              The Ohio State University
+            </li>
+            <li class="mb-2">BS Computer Science and Engineering</li>
+            <li class="small text-secondary">Computer Graphics and Game Design</li>
+          </ul>
+          <div class="mt-4 w-100 d-flex flex-column align-items-center flex-grow-1 justify-content-center">
+            <ul id="projects-list" class="list-unstyled w-100">
+              <!-- Projects list will be populated by JavaScript -->
+            </ul>
+          </div>
         </div>
-        <div class=profile-picture>
-            <img class=profilepic src="assets/paws.jpg" alt="Head Shot">
+        <div class="col-12 col-md-9 p-0" style="overflow-y: auto; max-height: 100vh;">
+          <div id="projects-container" class="d-flex flex-column">
+            <!-- Projects will be populated by JavaScript from projects-data.js -->
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+    <!-- Bootstrap JS (optional, for advanced features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+    <!-- Projects Data -->
+    <script src="projects-data.js"></script>
+    <script>
+      // Render projects list in sidebar
+      const projectsList = document.getElementById('projects-list');
+      if (projectsList) {
+        projectsList.innerHTML = projectsData.map(project => renderProjectListItem(project)).join('');
+      }
+
+      // Render project cards
+      const projectsContainer = document.getElementById('projects-container');
+      if (projectsContainer) {
+        projectsContainer.innerHTML = projectsData.map(project => renderProjectCard(project)).join('');
+      }
+
+      // Handle smooth scrolling for project links
+      document.addEventListener('click', function(e) {
+        if (e.target.matches('a[href^="#project-"]')) {
+          e.preventDefault();
+          const targetId = e.target.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const scrollContainer = document.querySelector('.col-12.col-md-9');
+            const containerTop = scrollContainer.getBoundingClientRect().top;
+            const elementTop = targetElement.getBoundingClientRect().top;
+            const offset = elementTop - containerTop + scrollContainer.scrollTop;
+            scrollContainer.scrollTo({
+              top: offset,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+
+    </script>
+  </body>
 </html>

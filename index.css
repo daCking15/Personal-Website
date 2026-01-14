@@ -1,51 +1,61 @@
-/* HTML Elements */
-a {
-    color: white;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-  background-color: rgb(32, 32, 32);
-  background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32));
-  background-size: 10px 10px, 10px 10px, 10px 5px;
-  background-position: 0px 0px, 5px 5px, 0px 0px;
-  margin: 0%;
+body {
+  background-color: white;
 }
 
+.resume-icon:hover {
+  background-color: #0d6efd !important;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
 
-/* Classes */
-.container {
-  height: 100%;
+.resume-icon:hover i {
+  color: white !important;
+}
+
+.project-link {
   width: 100%;
-  display: flex;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid transparent;
 }
 
-.info{
-    font-size: 36px;
-    text-align: center;
-    color: lightgrey;
-}
-.info p{
-    font-size: 36px
+.project-link:hover {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+  text-decoration: none !important;
+  border-color: #dee2e6;
 }
 
-.name{
-    font-size: 66px;
-    color: darkred;
-    text-align: center;
+.col-12.col-md-9 {
+  scroll-snap-type: y mandatory;
 }
 
-.profile-picture{
-  margin-top: 450px;
-  margin-left: 100px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  opacity: 25%;
-  z-index: -1;
+.project-card {
+  scroll-snap-align: start;
+}
+
+.project-card h2 a {
+  color: #212529;
+  transition: color 0.2s ease;
+}
+
+.project-card h2 a:hover {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.disabled-note {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.disabled-buttons-container:hover .disabled-note {
+  opacity: 1;
+}
+
+.disabled-project-btn {
+  pointer-events: auto;
 }
