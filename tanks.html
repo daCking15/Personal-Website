@@ -45,11 +45,11 @@
                     </div>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#tanksCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon arrow-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
                   <button class="carousel-control-next" type="button" data-bs-target="#tanksCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon arrow-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
                 </div>
@@ -74,6 +74,103 @@
         loadSidebar('project-tanks');
       }
       
+      // Function to detect brightness and adjust arrow colors
+      function adjustArrowColors() {
+        const carousel = document.getElementById('tanksCarousel');
+        const activeItem = carousel.querySelector('.carousel-item.active');
+        const img = activeItem ? activeItem.querySelector('img') : null;
+        
+        if (!img || !img.complete) {
+          // Wait for image to load
+          if (img) {
+            img.addEventListener('load', adjustArrowColors);
+          }
+          return;
+        }
+        
+        // Create canvas to sample image pixels
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.naturalWidth || img.width;
+        canvas.height = img.naturalHeight || img.height;
+        
+        ctx.drawImage(img, 0, 0);
+        
+        // Sample pixels from left and right edges (where arrows are)
+        const sampleWidth = Math.max(50, canvas.width * 0.1);
+        const sampleHeight = canvas.height;
+        
+        // Sample left edge (for prev arrow)
+        const leftPixels = ctx.getImageData(0, 0, sampleWidth, sampleHeight);
+        const leftBrightness = calculateBrightness(leftPixels);
+        
+        // Sample right edge (for next arrow)
+        const rightPixels = ctx.getImageData(canvas.width - sampleWidth, 0, sampleWidth, sampleHeight);
+        const rightBrightness = calculateBrightness(rightPixels);
+        
+        // Adjust arrow colors based on brightness
+        const arrows = document.querySelectorAll('.arrow-icon');
+        const prevArrow = document.querySelector('.carousel-control-prev .arrow-icon');
+        const nextArrow = document.querySelector('.carousel-control-next .arrow-icon');
+        
+        // Threshold: if brightness > 128, use dark arrows; otherwise use light
+        if (prevArrow) {
+          if (leftBrightness > 128) {
+            prevArrow.style.filter = 'invert(1) brightness(0.3)';
+          } else {
+            prevArrow.style.filter = 'none';
+          }
+        }
+        
+        if (nextArrow) {
+          if (rightBrightness > 128) {
+            nextArrow.style.filter = 'invert(1) brightness(0.3)';
+          } else {
+            nextArrow.style.filter = 'none';
+          }
+        }
+      }
+      
+      // Calculate average brightness from image data
+      function calculateBrightness(imageData) {
+        const data = imageData.data;
+        let sum = 0;
+        let count = 0;
+        
+        // Sample every 10th pixel for performance
+        for (let i = 0; i < data.length; i += 40) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          // Calculate luminance (perceived brightness)
+          const luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+          sum += luminance;
+          count++;
+        }
+        
+        return count > 0 ? sum / count : 128;
+      }
+      
+      // Adjust arrows when carousel slides
+      const carousel = document.getElementById('tanksCarousel');
+      if (carousel) {
+        carousel.addEventListener('slid.bs.carousel', adjustArrowColors);
+        
+        // Adjust on initial load
+        window.addEventListener('load', () => {
+          setTimeout(adjustArrowColors, 100);
+        });
+        
+        // Also adjust when images load
+        const images = carousel.querySelectorAll('img');
+        images.forEach(img => {
+          if (img.complete) {
+            adjustArrowColors();
+          } else {
+            img.addEventListener('load', adjustArrowColors);
+          }
+        });
+      }
     </script>
   </body>
 </html>
