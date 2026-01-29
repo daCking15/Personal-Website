@@ -8,11 +8,11 @@ const projectsData = [
     imageAlt: 'Tanks 3D',
     description: 'An independently developed local multiplayer game based off <a href="https://www.addictinggames.com/strategy/tanks" target="_blank" rel="noopener">Tanks</a>.',
     links: [
-      { text: 'Tanks 3D - Windows 10', url: 'https://drive.google.com/file/d/1tT-IDbtfIEdRaA1YNm8qGcXn0vjJTCTR/view?usp=sharing' },
-      { text: 'Tanks 3D - Web GL', url: 'https://drive.google.com/file/d/11APk7F6-FenBn0dZnr4fbMMxT6doM9uA/view?usp=sharing' },
+      { text: 'Tanks 3D - Windows 10', url: 'https://drive.google.com/file/d/16STLGbwajvYpD5MunB-OGidT-obHGsD7/view?usp=sharing' },
+      { text: 'Tanks 3D - Web GL', url: 'https://drive.google.com/file/d/11Kp5cgR9fHswsE3t8Q2KrGWMPZwPHAfC/view?usp=sharing' },
       { text: 'Controls', url: 'https://drive.google.com/file/d/17zlwyktAkVkoSAS7mygB7l8T4V9aqgcK/view?usp=sharing' }
     ],
-    disabled: true
+    disabled: false
   },
   {
     id: 'project-mariam',
@@ -131,6 +131,9 @@ function renderProjectCard(project) {
 }
 
 // Function to render project list items for sidebar
-function renderProjectListItem(project) {
-  return `<li class="mb-2 project-list-item"><a href="#${project.id}" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded">${project.name}</a></li>`;
+function renderProjectListItem(project, currentProjectId = null, hrefOverride = null) {
+  const fileName = project.id.replace('project-', '') + '.html';
+  const href = hrefOverride || (currentProjectId === project.id ? '#' : fileName);
+  const activeClass = currentProjectId === project.id ? 'active' : '';
+  return `<li class="mb-2 project-list-item"><a href="${href}" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${activeClass}">${project.name}</a></li>`;
 }
