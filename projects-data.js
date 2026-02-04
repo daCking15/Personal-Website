@@ -31,7 +31,7 @@ const projectsData = [
     title: 'Interactive Mirror',
     image: 'assets/covid.png',
     imageAlt: 'Interactive Mirror',
-    description: 'A collaboritively developed web application fulfilling the semester project for <a href="http://web.cse.ohio-state.edu/~shen.94/5544/" target="_blank" rel="noopener">CSE 5544</a>.',
+    description: 'A collaboritively developed web application fulfilling the semester project for my Data Visualization class.',
     links: [
       { text: 'Interactive Mirror', url: 'https://dacking15.github.io/InteractiveMirror/' },
       { text: 'Research Paper', url: 'assets/Research%20Paper.pdf', download: true }
@@ -43,7 +43,7 @@ const projectsData = [
     title: 'Crazy Rollercoaster',
     image: 'assets/rollercoaster.png',
     imageAlt: 'Crazy Rollercoaster',
-    description: 'A collaboritively developed experience fulfilling <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/lab5.html" target="_blank" rel="noopener">Lab 5</a> of <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/" target="_blank" rel="noopener">CSE 3541</a>.',
+    description: 'A collaboritively developed experience in my Unity Animation class demonstrating 3d curves between points.',
     links: [
       { text: 'Crazy Rollercoaster', url: 'https://dacking15.github.io/Lab8/' }
     ]
@@ -54,7 +54,7 @@ const projectsData = [
     title: 'Predator vs Prey',
     image: 'assets/predator.png',
     imageAlt: 'Predator vs Prey',
-    description: 'An independently developed experience fulfilling <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/lab4.html" target="_blank" rel="noopener">Lab 4</a> of <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/" target="_blank" rel="noopener">CSE 3541</a>.',
+    description: 'An independently developed experience in my Unity Animation class demonstrating simple AI simulations.',
     links: [
       { text: 'Predator vs Prey', url: 'https://dacking15.github.io/Lab4/' }
     ]
@@ -65,7 +65,7 @@ const projectsData = [
     title: 'Particle Generator',
     image: 'assets/particle.png',
     imageAlt: 'Particle Generator',
-    description: 'An independently developed experience fulfilling <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/lab3.html" target="_blank" rel="noopener">Lab 3</a> of <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/" target="_blank" rel="noopener">CSE 3541</a>.',
+    description: 'An independently developed experience in my Unity Animation Class demonstrating particle generation.',
     links: [
       { text: 'Particle Generator', url: 'https://dacking15.github.io/Lab3/' }
     ]
@@ -76,7 +76,7 @@ const projectsData = [
     title: 'Maze Game',
     image: 'assets/maze.png',
     imageAlt: 'Maze Game',
-    description: 'An independently developed experience fulfilling <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/lab2.html" target="_blank" rel="noopener">Lab 2</a> of <a href="http://web.cse.ohio-state.edu/~boggus.2/3541/" target="_blank" rel="noopener">CSE 3541</a>.',
+    description: 'An independently developed experience in my Unity Animation class demonstrating path finding / maze generation.',
     links: [
       { text: 'Maze Game', url: 'https://dacking15.github.io/Lab2/' }
     ]

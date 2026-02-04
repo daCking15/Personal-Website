@@ -1,0 +1,490 @@
+<div id="project-tanks" class="project-card bg-white px-5 py-5" style="width: 100%; display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto;">
+  <div class="mb-3 d-flex justify-content-between align-items-end flex-wrap gap-3">
+    <h2 class="display-5 fw-bold mb-0 text-dark">Tanks 3D</h2>
+    <div class="d-flex flex-wrap">
+      <a href="https://drive.google.com/uc?export=download&id=16STLGbwajvYpD5MunB-OGidT-obHGsD7" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary me-2 mb-2">Tanks 3D - Windows 10</a>
+      <a href="https://drive.google.com/uc?export=download&id=11Kp5cgR9fHswsE3t8Q2KrGWMPZwPHAfC" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary me-2 mb-2">Tanks 3D - Web GL</a>
+    </div>
+  </div>
+  <div class="mb-3 d-flex align-items-center justify-content-center" style="background-color: #000000; padding: 2rem;">
+    <div id="tanksCarousel" class="carousel slide" style="width: 100%;">
+      <div class="carousel-inner" style="transition: height 0.5s ease-in-out;">
+        <div class="carousel-item active" style="height: 100%;">
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+            <img src="assets/Tanks3D.png" alt="Tanks 3D" class="d-block w-100" style="max-height: 60vh; object-fit: contain;">
+          </div>
+        </div>
+        <div class="carousel-item" style="height: 100%;">
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+            <img src="assets/Tanks 3D Controls.jpg" alt="Tanks 3D Controls" class="d-block w-100" style="max-height: 60vh; object-fit: contain;">
+          </div>
+        </div>
+        <div class="carousel-item" style="height: 100%;">
+          <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; padding: 32px;">
+            <video id="tanksVideo" class="d-block" style="width: 100%; height: 100%; object-fit: contain; border: 2px solid transparent; transition: border-color 0.3s ease-in-out;" controls>
+              <source src="assets/Tanks3D_gameplay5.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-between mb-3" style="width: 100%;">
+    <button class="carousel-control-prev" type="button" data-bs-target="#tanksCarousel" data-bs-slide="prev" style="position: relative; width: auto; height: auto; opacity: 1; background-color: transparent; border: none; padding: 0.5rem;">
+      <span class="carousel-control-prev-icon arrow-icon" aria-hidden="true" style="filter: invert(1);"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <div class="carousel-indicators" style="position: relative; margin: 0; transform: none !important;">
+      <button type="button" data-bs-target="#tanksCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: #000;"></button>
+      <button type="button" data-bs-target="#tanksCarousel" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: #000;"></button>
+      <button type="button" data-bs-target="#tanksCarousel" data-bs-slide-to="2" aria-label="Slide 3" style="background-color: #000;"></button>
+    </div>
+    <button class="carousel-control-next" type="button" data-bs-target="#tanksCarousel" data-bs-slide="next" style="position: relative; width: auto; height: auto; opacity: 1; background-color: transparent; border: none; padding: 0.5rem;">
+      <span class="carousel-control-next-icon arrow-icon" aria-hidden="true" style="filter: invert(1);"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div>
+    <p class="lead text-muted mb-0" style="line-height: 1.8;">The summer after I graduated in the midst of the COVID-19 pandemic, when I wasn't applying for jobs, I was building my first major solo video game project. The core idea was to turn Addicting Games' cult classic, <a href="https://www.addictinggames.com/strategy/tanks" target="_blank" rel="noopener">Tanks</a>, into a full fledged 3D multiplayer game with ambitions of putting it on the Xbox store. A couple months later, I was hired by Equality Lab, and the project was never finished, but the alpha builds I have are pretty cool if not a little buggy. The Windows version is the most stable and definitive version. <span style="color: red;">While the Web GL version may be compatible on more devices, certain features may be broken including the radar and text running off the screen in the main menu. You do need to run a server in order to play the Web GL version, but perhaps I will deploy it when I get a chance and maybe even make a v2. I'm aware there is no sound in the video demo, I will try to record a new one once I run the Windows build.</span></p>
+  </div>
+</div>
+<script>
+  // Arrow color adjustment for tanks carousel
+  function adjustArrowColors() {
+    const carousel = document.getElementById('tanksCarousel');
+    if (!carousel) return;
+    
+    // Get the black background div (parent of carousel)
+    const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || 
+                                carousel.parentElement;
+    const blackBgRect = blackBackgroundDiv ? blackBackgroundDiv.getBoundingClientRect() : null;
+    
+    const activeItem = carousel.querySelector('.carousel-item.active');
+    const img = activeItem ? activeItem.querySelector('img') : null;
+    const video = activeItem ? activeItem.querySelector('video') : null;
+    
+    const prevArrow = document.querySelector('#tanksCarousel .carousel-control-prev .arrow-icon');
+    const nextArrow = document.querySelector('#tanksCarousel .carousel-control-next .arrow-icon');
+    const prevButton = document.querySelector('#tanksCarousel .carousel-control-prev');
+    const nextButton = document.querySelector('#tanksCarousel .carousel-control-next');
+    
+    // Check if arrows overlap the black background
+    let prevOverlapsBlack = false;
+    let nextOverlapsBlack = false;
+    
+    if (blackBgRect && prevButton && nextButton) {
+      const prevButtonRect = prevButton.getBoundingClientRect();
+      const nextButtonRect = nextButton.getBoundingClientRect();
+      
+      // Check if arrow buttons overlap with black background div
+      prevOverlapsBlack = !(prevButtonRect.right < blackBgRect.left || 
+                            prevButtonRect.left > blackBgRect.right ||
+                            prevButtonRect.bottom < blackBgRect.top || 
+                            prevButtonRect.top > blackBgRect.bottom);
+      
+      nextOverlapsBlack = !(nextButtonRect.right < blackBgRect.left || 
+                            nextButtonRect.left > blackBgRect.right ||
+                            nextButtonRect.bottom < blackBgRect.top || 
+                            nextButtonRect.top > blackBgRect.bottom);
+    }
+    
+    // If arrows overlap black background, make them light
+    if (prevOverlapsBlack && prevArrow) {
+      prevArrow.style.filter = 'none'; // Light arrows on black background
+    }
+    if (nextOverlapsBlack && nextArrow) {
+      nextArrow.style.filter = 'none'; // Light arrows on black background
+    }
+    
+    // If arrows don't overlap black background, check image brightness
+    if (!prevOverlapsBlack || !nextOverlapsBlack) {
+      // If it's a video slide, use default arrow colors (light)
+      if (video) {
+        if (!prevOverlapsBlack && prevArrow) prevArrow.style.filter = 'none';
+        if (!nextOverlapsBlack && nextArrow) nextArrow.style.filter = 'none';
+        return;
+      }
+      
+      if (!img || !img.complete) {
+        if (img) {
+          img.addEventListener('load', adjustArrowColors);
+        }
+        return;
+      }
+      
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.naturalWidth || img.width;
+      canvas.height = img.naturalHeight || img.height;
+      
+      ctx.drawImage(img, 0, 0);
+      
+      const sampleWidth = Math.max(50, canvas.width * 0.1);
+      const sampleHeight = canvas.height;
+      
+      const leftPixels = ctx.getImageData(0, 0, sampleWidth, sampleHeight);
+      const leftBrightness = calculateBrightness(leftPixels);
+      
+      const rightPixels = ctx.getImageData(canvas.width - sampleWidth, 0, sampleWidth, sampleHeight);
+      const rightBrightness = calculateBrightness(rightPixels);
+      
+      if (!prevOverlapsBlack && prevArrow) {
+        prevArrow.style.filter = leftBrightness > 128 ? 'invert(1) brightness(0.3)' : 'none';
+      }
+      
+      if (!nextOverlapsBlack && nextArrow) {
+        nextArrow.style.filter = rightBrightness > 128 ? 'invert(1) brightness(0.3)' : 'none';
+      }
+    }
+  }
+  
+  function calculateBrightness(imageData) {
+    const data = imageData.data;
+    let sum = 0;
+    let count = 0;
+    
+    for (let i = 0; i < data.length; i += 40) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+      sum += luminance;
+      count++;
+    }
+    
+    return count > 0 ? sum / count : 128;
+  }
+  
+  // Animate carousel height to match active slide
+  function animateCarouselHeight() {
+    const carousel = document.getElementById('tanksCarousel');
+    if (!carousel) return;
+    
+    const carouselInner = carousel.querySelector('.carousel-inner');
+    const activeItem = carousel.querySelector('.carousel-item.active');
+    if (!activeItem || !carouselInner) return;
+    
+    const media = activeItem.querySelector('img') || activeItem.querySelector('video');
+    if (!media) return;
+    
+    // Function to measure and set height
+    const measureAndSetHeight = () => {
+      // Temporarily show the item to measure it
+      const wasHidden = activeItem.classList.contains('carousel-item-next') || 
+                       activeItem.classList.contains('carousel-item-prev') ||
+                       activeItem.classList.contains('carousel-item-start') ||
+                       activeItem.classList.contains('carousel-item-end');
+      
+      // Get the natural height of the media element
+      let targetHeight = 0;
+      
+      if (media.tagName === 'VIDEO') {
+        // For video, use videoHeight or offsetHeight
+        targetHeight = media.videoHeight || media.offsetHeight;
+        // If video hasn't loaded metadata yet, wait for it
+        if (targetHeight === 0 && media.readyState < 2) {
+          media.addEventListener('loadedmetadata', measureAndSetHeight, { once: true });
+          return;
+        }
+      } else {
+        // For images, use naturalHeight or offsetHeight
+        targetHeight = media.naturalHeight || media.offsetHeight;
+        // If image hasn't loaded yet, wait for it
+        if (!media.complete) {
+          media.addEventListener('load', measureAndSetHeight, { once: true });
+          return;
+        }
+      }
+      
+      // Calculate the actual displayed height considering max-height constraint
+      const containerWidth = carouselInner.offsetWidth;
+      const maxHeightVh = 60; // 60vh
+      const maxHeightPx = (window.innerHeight * maxHeightVh) / 100;
+      
+      // Get the black background div padding (2rem = 32px on each side)
+      const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || carousel.parentElement;
+      const padding = blackBackgroundDiv ? 32 : 0; // 2rem = 32px
+      
+      let finalHeight = 0;
+      
+      if (media.tagName === 'VIDEO') {
+        // For video, wait for it to render and measure actual size
+        // Then set carousel height to video height + equal padding (32px top + 32px bottom)
+        // Calculate video height based on aspect ratio only (don't use offsetHeight which changes)
+        const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || carousel.parentElement;
+        if (blackBackgroundDiv) {
+          const blackDivWidth = blackBackgroundDiv.offsetWidth;
+          const blackDivPadding = 32; // 2rem
+          const availableWidth = blackDivWidth - (blackDivPadding * 2);
+          
+          // Use video's natural dimensions, not rendered dimensions which may change
+          const videoAspectRatio = (media.videoWidth || media.naturalWidth) / (media.videoHeight || media.naturalHeight);
+          
+          if (videoAspectRatio > 0) {
+            // Video content height (without controls) to fit available width
+            const videoContentHeight = availableWidth / videoAspectRatio;
+            // Estimate controls height (typically 48px)
+            const estimatedControlsHeight = 48;
+            const targetVideoHeight = videoContentHeight + estimatedControlsHeight;
+            
+            // Set carousel height = video height + top padding + bottom padding
+            const carouselHeight = targetVideoHeight + (blackDivPadding * 2);
+            carouselInner.style.height = carouselHeight + 'px';
+          }
+        }
+        
+        // Initial fallback
+        const availableWidth = containerWidth - (padding * 2);
+        const videoWidth = media.videoWidth || media.naturalWidth || availableWidth;
+        const videoHeight = media.videoHeight || media.naturalHeight || 1;
+        const videoAspectRatio = videoWidth / videoHeight;
+        const videoContentHeight = availableWidth / videoAspectRatio;
+        const estimatedControlsHeight = 48;
+        finalHeight = videoContentHeight + estimatedControlsHeight + (padding * 2);
+      } else {
+        // For images, use natural dimensions to calculate proper height
+        const imgWidth = media.naturalWidth || media.width || containerWidth;
+        const imgHeight = media.naturalHeight || media.height || 1;
+        
+        if (imgWidth > 0 && imgHeight > 0) {
+          const aspectRatio = imgWidth / imgHeight;
+          const heightAtFullWidth = containerWidth / aspectRatio;
+          finalHeight = Math.min(heightAtFullWidth, maxHeightPx);
+        } else {
+          // Fallback: wait for image to load
+          return;
+        }
+      }
+      
+      if (finalHeight > 0) {
+        carouselInner.style.height = finalHeight + 'px';
+      }
+    };
+    
+    measureAndSetHeight();
+  }
+  
+  // Initialize arrow color detection when carousel is available
+  function initTanksCarousel() {
+    const carousel = document.getElementById('tanksCarousel');
+    if (!carousel) {
+      // Retry if carousel not found yet
+      setTimeout(initTanksCarousel, 50);
+      return;
+    }
+    
+    const carouselInner = carousel.querySelector('.carousel-inner');
+    
+    // Set initial height
+    animateCarouselHeight();
+    
+    // Listen for slide start to prepare for height change
+    carousel.addEventListener('slide.bs.carousel', function(event) {
+      // Get the target slide that's about to become active
+      const targetSlide = event.relatedTarget;
+      const targetMedia = targetSlide ? (targetSlide.querySelector('img') || targetSlide.querySelector('video')) : null;
+      
+      if (targetMedia && carouselInner) {
+        // Measure the target slide's height
+        const measureTargetHeight = () => {
+          let targetHeight = 0;
+          
+          if (targetMedia.tagName === 'VIDEO') {
+            targetHeight = targetMedia.videoHeight || targetMedia.offsetHeight;
+            if (targetHeight === 0 && targetMedia.readyState < 2) {
+              targetMedia.addEventListener('loadedmetadata', measureTargetHeight, { once: true });
+              return;
+            }
+          } else {
+            targetHeight = targetMedia.naturalHeight || targetMedia.offsetHeight;
+            if (!targetMedia.complete) {
+              targetMedia.addEventListener('load', measureTargetHeight, { once: true });
+              return;
+            }
+          }
+          
+          const containerWidth = carouselInner.offsetWidth;
+          const maxHeightVh = 60;
+          const maxHeightPx = (window.innerHeight * maxHeightVh) / 100;
+          
+          // Get the black background div padding (2rem = 32px on each side)
+          const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || carousel.parentElement;
+          const padding = blackBackgroundDiv ? 32 : 0; // 2rem = 32px
+          
+          let finalHeight = 0;
+          
+          if (targetMedia.tagName === 'VIDEO') {
+            // For video, calculate based on video dimensions
+            // Available width accounts for left/right padding
+            const availableWidth = containerWidth - (padding * 2);
+            
+            const videoWidth = targetMedia.videoWidth || targetMedia.naturalWidth || availableWidth;
+            const videoHeight = targetMedia.videoHeight || targetMedia.naturalHeight || 1;
+            const videoAspectRatio = videoWidth / videoHeight;
+            
+            // Calculate video content height at available width
+            const videoContentHeight = availableWidth / videoAspectRatio;
+            
+            // Constrain by max height minus top/bottom padding
+            const maxVideoContentHeight = maxHeightPx - (padding * 2);
+            const constrainedVideoHeight = Math.min(videoContentHeight, maxVideoContentHeight);
+            
+            // Video controls add extra height
+            const estimatedControlsHeight = 48;
+            finalHeight = constrainedVideoHeight + estimatedControlsHeight + (padding * 2);
+          } else {
+            // For images, use natural dimensions to calculate proper height
+            const imgWidth = targetMedia.naturalWidth || targetMedia.width || containerWidth;
+            const imgHeight = targetMedia.naturalHeight || targetMedia.height || 1;
+            
+            if (imgWidth > 0 && imgHeight > 0) {
+              const aspectRatio = imgWidth / imgHeight;
+              const heightAtFullWidth = containerWidth / aspectRatio;
+              finalHeight = Math.min(heightAtFullWidth, maxHeightPx);
+            }
+          }
+          
+          if (finalHeight > 0) {
+            carouselInner.style.height = finalHeight + 'px';
+          }
+        };
+        
+        measureTargetHeight();
+      }
+    });
+    
+    // Add event listener for carousel slide completion
+    carousel.addEventListener('slid.bs.carousel', () => {
+      adjustArrowColors();
+      // Ensure height is correct after slide completes
+      setTimeout(animateCarouselHeight, 50);
+      
+      // Adjust carousel indicators position based on active slide
+      const activeItem = carousel.querySelector('.carousel-item.active');
+      const indicators = carousel.querySelector('.carousel-indicators');
+      const video = activeItem ? activeItem.querySelector('video') : null;
+      
+      if (indicators) {
+        if (video) {
+          // Calculate position: center indicators between bottom of video and bottom of parent div
+          const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || carousel.parentElement;
+          if (blackBackgroundDiv) {
+            const videoRect = video.getBoundingClientRect();
+            const parentRect = blackBackgroundDiv.getBoundingClientRect();
+            
+            // Distance from bottom of video to bottom of parent
+            const spaceBelow = parentRect.bottom - videoRect.bottom;
+            
+            // Center the indicators in that space (indicators are typically ~20px tall)
+            const indicatorHeight = 20;
+            const centerPosition = spaceBelow / 2 - indicatorHeight / 2;
+            
+            // Translate down from default position
+            indicators.style.transform = `translateY(${centerPosition}px)`;
+          }
+        } else {
+          // Reset to default position for images
+          indicators.style.transform = 'translateY(0)';
+        }
+      }
+    });
+    
+    // Wait for images to load, then adjust colors and height
+    const images = carousel.querySelectorAll('img');
+    const videos = carousel.querySelectorAll('video');
+    let mediaLoaded = 0;
+    const totalMedia = images.length + videos.length;
+    
+    // Adjust colors immediately (will handle video case in adjustArrowColors function)
+    adjustArrowColors();
+    
+    // Indicators are now outside the black div, no initial positioning needed
+    
+    if (totalMedia === 0) {
+      setTimeout(adjustArrowColors, 200);
+    } else {
+      [...images, ...videos].forEach(media => {
+        if (media.complete || (media.tagName === 'VIDEO' && media.readyState >= 2)) {
+          mediaLoaded++;
+          if (mediaLoaded === totalMedia) {
+            setTimeout(() => {
+              adjustArrowColors();
+              animateCarouselHeight();
+              // For video, recalculate after a short delay to get actual rendered height
+              if (media.tagName === 'VIDEO') {
+                setTimeout(animateCarouselHeight, 200);
+              }
+            }, 100);
+          }
+        } else {
+          const loadEvent = media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load';
+          media.addEventListener(loadEvent, () => {
+            mediaLoaded++;
+            if (mediaLoaded === totalMedia) {
+              setTimeout(() => {
+                adjustArrowColors();
+                animateCarouselHeight();
+                // For video, recalculate after a short delay to get actual rendered height
+                if (media.tagName === 'VIDEO') {
+                  setTimeout(animateCarouselHeight, 200);
+                }
+              }, 100);
+            }
+            // Also adjust when individual media loads
+            adjustArrowColors();
+            animateCarouselHeight();
+            // For video, recalculate after render
+            if (media.tagName === 'VIDEO') {
+              setTimeout(animateCarouselHeight, 200);
+            }
+          }, { once: true });
+        }
+      });
+      
+      // If all media are already loaded
+      if (mediaLoaded === totalMedia) {
+        setTimeout(() => {
+          adjustArrowColors();
+          animateCarouselHeight();
+        }, 100);
+      }
+    }
+    
+    // Handle window resize to recalculate heights
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(animateCarouselHeight, 150);
+    });
+    
+    // Prevent video clicks from triggering carousel navigation
+    const video = carousel.querySelector('video');
+    if (video) {
+      // Stop click events on video from bubbling to carousel
+      video.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+      
+      // Also prevent clicks on video controls
+      video.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+      });
+      
+      video.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+      });
+    }
+  }
+  
+  // Start initialization
+  initTanksCarousel();
+</script>
+<style>
+  #tanksVideo {
+    transition: border-color 0.3s ease-in-out !important;
+  }
+  #tanksVideo:hover {
+    border: 2px solid #d3d3d3 !important;
+  }
+</style>

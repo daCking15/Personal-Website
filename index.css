@@ -19,6 +19,7 @@ body {
 .project-link {
   width: 100%;
   border: 1px solid transparent;
+  transition: all 0.2s ease;
 }
 
 .project-link:hover {
@@ -28,12 +29,28 @@ body {
   border-color: #dee2e6;
 }
 
+.project-link.active {
+  background-color: #e7f1ff !important;
+  color: #0d6efd !important;
+  font-weight: 600;
+}
+
 .col-12.col-md-9 {
-  scroll-snap-type: y mandatory;
+  /* scroll-snap removed to allow normal scrolling */
+}
+
+#projects-container {
+  transition: opacity 0.3s ease;
+}
+
+/* Smooth transition for carousel arrow color changes */
+.carousel-control-prev .arrow-icon,
+.carousel-control-next .arrow-icon {
+  transition: filter 0.4s ease;
 }
 
 .project-card {
-  scroll-snap-align: start;
+  /* scroll-snap removed to allow normal scrolling */
 }
 
 .project-card h2 a {

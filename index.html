@@ -21,6 +21,7 @@
         <div id="sidebar-container" class="col-12 col-md-3"></div>
         <div class="col-12 col-md-9 p-0" style="overflow-y: auto; max-height: 100vh;">
           <div id="projects-container" class="d-flex flex-column">
+            <!-- Initial home content - will be replaced by router if needed -->
             <div class="container py-5">
               <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -93,9 +94,27 @@
       crossorigin="anonymous"></script>
     <!-- Sidebar -->
     <script src="sidebar.js"></script>
+    <!-- Router for SPA navigation -->
+    <script src="router.js"></script>
     <script>
-      // Load sidebar (no current project for index page)
-      loadSidebar();
+      // Initialize router first, then load sidebar with current route
+      function initApp() {
+        // Get initial route from URL hash
+        const initialRoute = window.location.hash.slice(1) || 'home';
+        const currentProjectId = initialRoute === 'home' ? null : initialRoute;
+        
+        // Load sidebar with current project ID
+        loadSidebar(currentProjectId);
+        
+        // Initialize router after sidebar loads
+        setTimeout(() => {
+          if (typeof router !== 'undefined' && router.init) {
+            router.init();
+          }
+        }, 200);
+      }
+      
+      initApp();
     </script>
   </body>
 </html>
