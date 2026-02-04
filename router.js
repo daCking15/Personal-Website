@@ -2,6 +2,7 @@
 const router = {
   currentRoute: 'home',
   contentContainer: null,
+  initialHomeContent: null,
   
   init() {
     this.contentContainer = document.getElementById('projects-container');
@@ -10,6 +11,11 @@ const router = {
       // Retry after a short delay
       setTimeout(() => this.init(), 100);
       return;
+    }
+    
+    // Store the initial home content before it gets replaced
+    if (!this.initialHomeContent) {
+      this.initialHomeContent = this.contentContainer.innerHTML;
     }
     
     // Set initial opacity
@@ -39,8 +45,10 @@ const router = {
   navigate(route) {
     if (this.currentRoute === route) return;
     
-    // Update URL without reload
-    window.history.pushState({ route }, '', route === 'home' ? '/' : `#${route}`);
+    // Update URL without reload, preserving base path
+    const basePath = window.location.pathname;
+    const newUrl = route === 'home' ? basePath : `${basePath}#${route}`;
+    window.history.pushState({ route }, '', newUrl);
     this.currentRoute = route;
     this.loadContent(route);
   },
@@ -100,17 +108,23 @@ const router = {
   },
   
   async loadHomeContent() {
+    // Use stored initial home content if available
+    if (this.initialHomeContent) {
+      return this.initialHomeContent;
+    }
+    
+    // Fallback: try to fetch home-content.html if it exists
     try {
       const response = await fetch('home-content.html');
-      if (!response.ok) {
-        throw new Error(`Failed to load home-content.html: ${response.status}`);
+      if (response.ok) {
+        return await response.text();
       }
-      return await response.text();
     } catch (error) {
-      console.error('Error loading home content:', error);
-      // Return empty content on error
-      return '<div class="container py-5"><p>Error loading content. Please refresh the page.</p></div>';
+      // Ignore fetch errors, use fallback
     }
+    
+    // Final fallback: return empty content
+    return '<div class="container py-5"><p>Error loading content. Please refresh the page.</p></div>';
   },
   
   async loadProjectContent(projectId) {
