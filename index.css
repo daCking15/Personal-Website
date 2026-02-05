@@ -63,6 +63,11 @@ body {
   text-decoration: none;
 }
 
+/* Make all display-5 titles slightly smaller */
+.display-5 {
+  font-size: 2.5rem;
+}
+
 .disabled-note {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -175,16 +180,493 @@ body {
   margin-top: 1rem;
 }
 
-@media (max-width: 768px) {
+/* Mobile Responsive Styles */
+@media (max-width: 767.98px) {
+  /* Timeline adjustments for mobile */
   .timeline::before {
     left: 1.5rem;
   }
   
   .timeline-item {
     padding-left: 4rem;
+    margin-bottom: 2rem;
   }
   
   .timeline-marker {
     left: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  
+  .timeline-content {
+    padding: 1rem;
+  }
+  
+  .timeline-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .timeline-title {
+    font-size: 1.25rem;
+  }
+  
+  .timeline-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* Make timeline items stack better on mobile */
+  .timeline-content .d-flex {
+    flex-wrap: nowrap !important;
+  }
+  
+  .timeline-content .d-flex {
+    align-items: center !important;
+  }
+  
+  /* Ensure timeline summary takes full width on mobile */
+  .timeline-summary {
+    width: 100% !important;
+  }
+  
+  /* Sidebar adjustments - make sticky to prevent content shifting */
+  #sidebar-container {
+    border-right: none !important;
+    border-bottom: 1px solid #dee2e6;
+    border-left: none !important;
+    border-top: none !important;
+    padding-bottom: 0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    background-color: white !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Remove all borders from the navigation row container */
+  #sidebar-container > div {
+    border: none !important;
+  }
+  
+  #projects-list {
+    border: none !important;
+  }
+  
+  #sidebar-container > div {
+    padding-bottom: 0 !important;
+    padding-top: 0.5rem !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Ensure the row layout doesn't shift */
+  .row.min-vh-100 {
+    align-items: flex-start !important;
+  }
+  
+  /* Remove flex-grow on mobile */
+  #sidebar-container > div .flex-md-grow-1 {
+    flex-grow: 0 !important;
+  }
+  
+  #sidebar-container .min-vh-100 {
+    min-height: auto !important;
+    height: auto !important;
+  }
+  
+  #sidebar-container img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  /* Project links mobile adjustments - show as icon buttons */
+  .project-link {
+    font-size: 0.9rem;
+    padding: 0.5rem !important;
+    min-height: auto !important;
+    height: auto !important;
+    min-width: 44px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Mobile: horizontal scrollable icon row */
+  #projects-list {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 0.25rem 0 !important;
+    margin: 0 !important;
+    gap: 0.5rem !important;
+    align-items: center !important;
+    height: auto !important;
+    min-height: auto !important;
+    flex-shrink: 0 !important;
+  }
+  
+  #sidebar-container .w-100:last-child {
+    height: auto !important;
+    min-height: auto !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Prevent sidebar from affecting content position */
+  #sidebar-container {
+    overflow: visible !important;
+  }
+  
+  /* Ensure active state doesn't change layout */
+  .project-link.active {
+    box-sizing: border-box !important;
+  }
+  
+  #projects-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  .project-list-item {
+    flex: 0 0 auto !important;
+    margin-bottom: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .project-link {
+    white-space: nowrap !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Remove all bottom spacing from sidebar on mobile */
+  #sidebar-container .w-100:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  #sidebar-container .w-100:last-child ul {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  /* Base styles - icons hidden, text shown by default */
+  .project-link .mobile-icon {
+    display: none;
+  }
+  
+  .project-link .desktop-text {
+    display: inline;
+  }
+  
+  /* Ensure Bootstrap Icons font loads on iOS - multiple formats for compatibility */
+  @font-face {
+    font-family: "bootstrap-icons";
+    src: url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/fonts/bootstrap-icons.woff2") format("woff2"),
+         url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/fonts/bootstrap-icons.woff") format("woff"),
+         url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/fonts/bootstrap-icons.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+E000-U+F8FF;
+  }
+  
+  /* Force SVG icons on mobile - hide text completely */
+  @media (max-width: 767.98px) {
+    /* Test: Add background to verify media query works */
+    #projects-list {
+      background: transparent;
+    }
+    
+    /* Hide all text content on mobile */
+    .project-link {
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+    
+    /* Show Bootstrap Icons on mobile */
+    .project-link .mobile-icon {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 1.5rem !important;
+      line-height: 1 !important;
+      color: #6c757d !important;
+      font-family: "bootstrap-icons" !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 1.5rem !important;
+      height: 1.5rem !important;
+      overflow: visible !important;
+    }
+    
+    .project-link {
+      padding: 0.25rem 0.5rem !important;
+      min-height: auto !important;
+      height: auto !important;
+      line-height: 1.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    /* Ensure consistent row height */
+    #projects-list {
+      line-height: 1.5rem !important;
+      height: auto !important;
+      min-height: auto !important;
+    }
+    
+    .project-link.active .mobile-icon {
+      color: #0d6efd !important;
+    }
+    
+    .project-link:hover .mobile-icon {
+      color: #212529 !important;
+    }
+    
+    .project-link.active:hover .mobile-icon {
+      color: #0d6efd !important;
+    }
+    
+    /* Ensure text is completely hidden */
+    .project-link .desktop-text {
+      display: none !important;
+      visibility: hidden !important;
+      font-size: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      text-indent: -9999px !important;
+      position: absolute !important;
+      left: -9999px !important;
+      opacity: 0 !important;
+    }
+  }
+  
+  /* Desktop: Hide icons, show text */
+  @media (min-width: 768px) {
+    .project-link .mobile-icon {
+      display: none !important;
+      visibility: hidden !important;
+      width: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+    }
+    
+    .project-link .desktop-text {
+      display: inline !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure icons are completely removed on desktop */
+    .project-link i.mobile-icon {
+      display: none !important;
+    }
+    
+    #projects-list {
+      flex-direction: column !important;
+    }
+    
+    .project-list-item {
+      margin-bottom: 0.5rem !important;
+    }
+  }
+  
+  .project-link.active i {
+    color: #0d6efd;
+  }
+  
+  .project-link:hover i {
+    color: #212529;
+  }
+  
+  .project-link.active:hover i {
+    color: #0d6efd;
+  }
+  
+  /* Project container adjustments */
+  .col-12.col-md-9 {
+    max-height: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Project card mobile styles - override inline styles */
+  .project-card {
+    padding: 1rem 1.5rem 1.5rem 1.5rem !important;
+    padding-top: 1rem !important;
+    min-height: calc(100vh - 60px) !important;
+    justify-content: flex-start !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* Ensure projects container aligns to top */
+  #projects-container {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    min-height: calc(100vh - 60px) !important;
+  }
+  
+  /* Force override inline styles with higher specificity */
+  #projects-container .project-card {
+    justify-content: flex-start !important;
+    min-height: calc(100vh - 60px) !important;
+    padding-top: 1rem !important;
+    margin-top: 0 !important;
+  }
+  
+  .project-card .px-5 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .project-card .py-5 {
+    padding-top: 1rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .project-card .py-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Black background divs in projects */
+  .project-card [style*="background-color: #000000"] {
+    padding: 1rem !important;
+  }
+  
+  /* Carousel controls mobile adjustments */
+  .carousel-control-prev,
+  .carousel-control-next {
+    padding: 0.25rem !important;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  /* Carousel indicators mobile */
+  .carousel-indicators {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .carousel-indicators button {
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+  }
+  
+  /* Display adjustments for mobile */
+  .display-4 {
+    font-size: 2rem;
+  }
+  
+  .display-5 {
+    font-size: 1.5rem;
+  }
+  
+  /* Container padding adjustments */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0 !important;
+  }
+  
+  /* Reduce top padding on mobile for home page */
+  .container.py-5 {
+    padding-top: 1rem !important;
+  }
+  
+  /* Button adjustments */
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Ensure images are responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Text readability on mobile */
+  .lead {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Better spacing for project buttons */
+  .project-card .d-flex.flex-wrap {
+    gap: 0.5rem;
+  }
+  
+  /* Video responsive */
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .timeline-item {
+    padding-left: 3.5rem;
+  }
+  
+  .timeline::before {
+    left: 1.25rem;
+  }
+  
+  .timeline-marker {
+    left: 0.75rem;
+  }
+  
+  .timeline-logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .timeline-title {
+    font-size: 1.1rem;
+  }
+  
+  .display-4 {
+    font-size: 1.75rem;
+  }
+  
+  .display-5 {
+    font-size: 1.25rem;
+  }
+  
+  .project-card {
+    padding: 1rem !important;
+  }
+  
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .lead {
+    font-size: 0.95rem;
+  }
+  
+  #sidebar-container img {
+    width: 80px !important;
+    height: 80px !important;
   }
 }

@@ -1,7 +1,10 @@
+<!-- Testy Test  -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chris King</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="icon" href="assets/favicon.ico" />
@@ -14,33 +17,71 @@
     />
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   </head>
   <body class="min-vh-100">
     <div class="container-fluid min-vh-100">
       <div class="row min-vh-100 g-0">
         <div id="sidebar-container" class="col-12 col-md-3"></div>
-        <div class="col-12 col-md-9 p-0" style="overflow-y: auto; max-height: 100vh;">
+        <div class="col-12 col-md-9 p-0" style="overflow-y: auto; max-height: 100vh; overflow-x: hidden;">
           <div id="projects-container" class="d-flex flex-column">
             <!-- Initial home content - will be replaced by router if needed -->
-            <div class="container py-5">
+            <div class="container py-5 pt-0 pt-md-5">
               <div class="row justify-content-center">
                 <div class="col-lg-8">
-                  <h1 class="display-4 fw-bold mb-5 text-center">My Journey</h1>
+                  <!-- Mobile profile section - shown only on mobile -->
+                  <div class="d-md-none mb-5">
+                    <!-- Resume icon in top left -->
+                    <div class="d-flex justify-content-start mb-3">
+                      <a
+                        href="assets/Chris King Development Resume.pdf"
+                        download
+                        class="resume-icon text-decoration-none d-flex align-items-center justify-content-center rounded-circle bg-light border border-primary"
+                        title="Download Resume"
+                        style="width: 50px; height: 50px;"
+                      >
+                        <i class="bi bi-file-earmark-text text-primary fs-4"></i>
+                      </a>
+                    </div>
+                    
+                    <!-- Profile picture and credentials centered -->
+                    <div class="text-center">
+                      <img src="assets/paws.jpg" alt="Head Shot"
+                        class="rounded-circle shadow mb-4"
+                        style="width: 150px; height: 150px; object-fit: cover;"
+                      />
+                      <h2 class="mb-3 h4 fw-bold">Christopher James King</h2>
+                      <ul class="list-unstyled text-muted mb-4">
+                        <li class="mb-2 d-flex align-items-center justify-content-center gap-2">
+                          <img src="assets/Block O.png" 
+                               alt="Ohio State Logo" 
+                               style="width: 24px; height: 24px; object-fit: contain;">
+                          The Ohio State University
+                        </li>
+                        <li class="mb-2">BS Computer Science and Engineering</li>
+                        <li class="small text-secondary">Computer Graphics and Game Design</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <h1 class="display-4 fw-bold mb-5 text-center d-none d-md-block">My Journey</h1>
+                  
                   <div class="timeline">
                     <!-- 2023 - Vertafore -->
                     <div class="timeline-item">
                       <div class="timeline-marker"></div>
                       <div class="timeline-content">
-                        <div class="d-flex align-items-center gap-3">
-                          <img src="assets/vertafore.jpeg" alt="Vertafore" class="timeline-logo">
-                          <div class="flex-grow-1">
-                            <div class="timeline-year">2023</div>
+                        <div class="timeline-year mb-2">2023</div>
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                          <img src="assets/vertafore.jpeg" alt="Vertafore" class="timeline-logo" style="flex-shrink: 0;">
+                          <div>
                             <h3 class="timeline-title mb-1">Vertafore</h3>
                             <p class="timeline-subtitle mb-0">Software Engineer 2</p>
-                            <div class="timeline-summary">
-                              As a full stack developer at the industry leading Insurtech company, Vertafore, I am a core member of the QQCatalyst Denver development team. QQ is used by thousands of small insurance agencies around the world to manage their customers and their policies. In my time there, I have played a major role in the development of new dashboard widgets and the bootstrap redesign of the site.
-                            </div>
                           </div>
+                        </div>
+                        <div class="timeline-summary">
+                          As a full stack developer at the industry leading Insurtech company, Vertafore, I am a core member of the QQCatalyst Denver development team. QQ is used by thousands of small insurance agencies around the world to manage their customers and their policies. In my time there, I have played a major role in the development of new dashboard widgets and the bootstrap redesign of the site.
                         </div>
                       </div>
                     </div>
@@ -49,16 +90,16 @@
                     <div class="timeline-item">
                       <div class="timeline-marker"></div>
                       <div class="timeline-content">
-                        <div class="d-flex align-items-center gap-3">
-                          <img src="assets/eqlab_rebrand.png" alt="EQLAB" class="timeline-logo">
-                          <div class="flex-grow-1">
-                            <div class="timeline-year">2020</div>
+                        <div class="timeline-year mb-2">2020</div>
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                          <img src="assets/eqlab_rebrand.png" alt="EQLAB" class="timeline-logo" style="flex-shrink: 0;">
+                          <div>
                             <h3 class="timeline-title mb-1">EQLAB</h3>
                             <p class="timeline-subtitle mb-0">Web XR Developer</p>
-                            <div class="timeline-summary">
-                              As a result of my success in the VR Animation Capstone at Ohio State, I was hired to lead Equality Lab's Web XR project. Using the open source platform, Mozilla Hubs, I developed custom environments for several clients including an interactive career simulator for Miami Dade County Schools, an AI career counselor for The Paris Unemployment Office, and a virtual space for Christians and Muslims to pray together for the US Institute of Peace in Pakistan.
-                            </div>
                           </div>
+                        </div>
+                        <div class="timeline-summary">
+                          As a result of my success in the VR Animation Capstone at Ohio State, I was hired to lead Equality Lab's Web XR project. Using the open source platform, Mozilla Hubs, I developed custom environments for several clients including an interactive career simulator for Miami Dade County Schools, an AI career counselor for The Paris Unemployment Office, and a virtual space for Christians and Muslims to pray together for the US Institute of Peace in Pakistan.
                         </div>
                       </div>
                     </div>
@@ -67,16 +108,16 @@
                     <div class="timeline-item">
                       <div class="timeline-marker"></div>
                       <div class="timeline-content">
-                        <div class="d-flex align-items-center gap-3">
-                          <img src="assets/Block O.png" alt="The Ohio State University" class="timeline-logo">
-                          <div class="flex-grow-1">
-                            <div class="timeline-year">2015</div>
+                        <div class="timeline-year mb-2">2015</div>
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                          <img src="assets/Block O.png" alt="The Ohio State University" class="timeline-logo" style="flex-shrink: 0;">
+                          <div>
                             <h3 class="timeline-title mb-1">The Ohio State University</h3>
                             <p class="timeline-subtitle mb-0">Computer Science and Engineering</p>
-                            <div class="timeline-summary">
-                              While I was fascinated by computers from a young age and had taken coding classes in high school, I credit the scarlet and gray for molding me into a competent developer with a keen sense for design. From my humble beginnings learning recursion for the first time to creating complex data visualization websites and VR video games, the time I had there gave me the tools and discipline to excel.
-                            </div>
                           </div>
+                        </div>
+                        <div class="timeline-summary">
+                          While I was fascinated by computers from a young age and had taken coding classes in high school, I credit the scarlet and gray for molding me into a competent developer with a keen sense for design. From my humble beginnings learning recursion for the first time to creating complex data visualization websites and VR video games, the time I had there gave me the tools and discipline to excel.
                         </div>
                       </div>
                     </div>

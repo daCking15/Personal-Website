@@ -1,13 +1,26 @@
+// Bootstrap Icons for mobile navigation
+const iconClasses = {
+  home: 'bi-house-fill',
+  controller: 'bi-controller',
+  eye: 'bi-eye-fill',
+  camera: 'bi-camera-fill',
+  speedometer: 'bi-speedometer2',
+  shield: 'bi-shield-fill',
+  star: 'bi-star-fill',
+  grid: 'bi-grid-3x3-gap-fill',
+  music: 'bi-music-note-beamed'
+};
+
 // Sidebar navigation data and functions
 const projectsNavData = [
-  { id: 'project-tanks', name: 'Tanks 3D', fileName: 'projects/tanks.html' },
-  { id: 'project-mariam', name: 'Eyes of Mariam', fileName: 'projects/mariam.html' },
-  { id: 'project-mirror', name: 'Interactive Mirror', fileName: 'projects/mirror.html' },
-  { id: 'project-rollercoaster', name: 'Crazy Rollercoaster', fileName: 'projects/rollercoaster.html' },
-  { id: 'project-predator', name: 'Predator vs Prey', fileName: 'projects/predator.html' },
-  { id: 'project-particle', name: 'Particle Generator', fileName: 'projects/particle.html' },
-  { id: 'project-maze', name: 'Maze Game', fileName: 'projects/maze.html' },
-  { id: 'project-myaux', name: 'My Aux', fileName: 'projects/myaux.html' }
+  { id: 'project-tanks', name: 'Tanks 3D', fileName: 'projects/tanks.html', iconKey: 'controller' },
+  { id: 'project-mariam', name: 'Eyes of Mariam', fileName: 'projects/mariam.html', iconKey: 'eye' },
+  { id: 'project-mirror', name: 'Interactive Mirror', fileName: 'projects/mirror.html', iconKey: 'camera' },
+  { id: 'project-rollercoaster', name: 'Crazy Rollercoaster', fileName: 'projects/rollercoaster.html', iconKey: 'speedometer' },
+  { id: 'project-predator', name: 'Predator vs Prey', fileName: 'projects/predator.html', iconKey: 'shield' },
+  { id: 'project-particle', name: 'Particle Generator', fileName: 'projects/particle.html', iconKey: 'star' },
+  { id: 'project-maze', name: 'Maze Game', fileName: 'projects/maze.html', iconKey: 'grid' },
+  { id: 'project-myaux', name: 'My Aux', fileName: 'projects/myaux.html', iconKey: 'music' }
 ];
 
 // Function to load sidebar HTML
@@ -22,12 +35,16 @@ function loadSidebar(currentProjectId = null) {
         // After loading sidebar, populate projects list with router links
         const projectsList = document.getElementById('projects-list');
         if (projectsList) {
-          const homeLink = `<li class="mb-2 project-list-item"><a href="#" data-route="home" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${currentProjectId === null ? 'active' : ''}">Home</a></li>`;
+          const homeLink = `<li class="mb-2 project-list-item"><a href="#" data-route="home" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${currentProjectId === null ? 'active' : ''}" title="Home"><i class="bi ${iconClasses.home} mobile-icon"></i><span class="desktop-text">Home</span></a></li>`;
           const projectLinks = projectsNavData.map(project => {
             const activeClass = currentProjectId === project.id ? 'active' : '';
-            return `<li class="mb-2 project-list-item"><a href="#" data-route="${project.id}" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${activeClass}">${project.name}</a></li>`;
+            const iconClass = iconClasses[project.iconKey] || iconClasses.star; // Fallback icon
+            return `<li class="mb-2 project-list-item"><a href="#" data-route="${project.id}" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${activeClass}" title="${project.name}"><i class="bi ${iconClass} mobile-icon"></i><span class="desktop-text">${project.name}</span></a></li>`;
           }).join('');
           projectsList.innerHTML = homeLink + projectLinks;
+          
+          // Debug: Log to verify icons are being added
+          console.log('Icons added to sidebar:', projectsList.children.length, 'items');
         }
       }
     })

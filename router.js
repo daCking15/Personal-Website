@@ -40,6 +40,42 @@ const router = {
         this.navigate(route);
       }
     });
+    
+    // Handle window resize/orientation change for mobile project cards
+    window.addEventListener('resize', () => {
+      this.adjustProjectCardsForMobile();
+    });
+    
+    // Initial adjustment
+    this.adjustProjectCardsForMobile();
+  },
+  
+  adjustProjectCardsForMobile() {
+    if (window.innerWidth <= 767.98) {
+      const projectCards = document.querySelectorAll('.project-card');
+      const sidebarHeight = document.querySelector('#sidebar-container')?.offsetHeight || 60;
+      const viewportHeight = window.innerHeight;
+      const minHeight = viewportHeight - sidebarHeight;
+      
+      projectCards.forEach(card => {
+        if (card.style.justifyContent === 'center') {
+          card.style.justifyContent = 'flex-start';
+        }
+        // Set min-height to fill viewport minus sidebar
+        card.style.minHeight = `${minHeight}px`;
+        // Set small top padding
+        card.style.paddingTop = '1rem';
+        card.style.marginTop = '0';
+      });
+      
+      // Also adjust projects container
+      const projectsContainer = document.getElementById('projects-container');
+      if (projectsContainer) {
+        projectsContainer.style.minHeight = `${minHeight}px`;
+        projectsContainer.style.paddingTop = '0';
+        projectsContainer.style.marginTop = '0';
+      }
+    }
   },
   
   navigate(route) {
@@ -67,12 +103,13 @@ const router = {
   async loadContent(route) {
     if (!this.contentContainer) return;
     
-    // Add fade-out class
+    // Smooth fade-out with slight transform
+    this.contentContainer.style.transition = 'opacity 0.4s ease-in-out, transform 0.4s ease-in-out';
     this.contentContainer.style.opacity = '0';
-    this.contentContainer.style.transition = 'opacity 0.3s ease';
+    this.contentContainer.style.transform = 'translateY(10px)';
     
-    // Wait for fade-out
-    await new Promise(resolve => setTimeout(resolve, 150));
+    // Wait for fade-out to complete
+    await new Promise(resolve => setTimeout(resolve, 400));
     
     try {
       let content = '';
@@ -87,6 +124,9 @@ const router = {
       
       this.contentContainer.innerHTML = content;
       
+      // Reset transform for fade-in
+      this.contentContainer.style.transform = 'translateY(-10px)';
+      
       // Reinitialize any scripts needed (like carousel)
       this.reinitializeComponents();
       
@@ -96,14 +136,18 @@ const router = {
       // Scroll to top
       this.contentContainer.parentElement.scrollTop = 0;
       
-      // Fade in
-      setTimeout(() => {
-        this.contentContainer.style.opacity = '1';
-      }, 50);
+      // Smooth fade-in with transform
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          this.contentContainer.style.opacity = '1';
+          this.contentContainer.style.transform = 'translateY(0)';
+        }, 10);
+      });
       
     } catch (error) {
       console.error('Error loading content:', error);
       this.contentContainer.style.opacity = '1';
+      this.contentContainer.style.transform = 'translateY(0)';
     }
   },
   
@@ -157,6 +201,19 @@ const router = {
   },
   
   reinitializeComponents() {
+    // Override inline styles on project cards for mobile
+    if (window.innerWidth <= 767.98) {
+      const projectCards = this.contentContainer.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        if (card.style.justifyContent === 'center') {
+          card.style.justifyContent = 'flex-start';
+        }
+        if (card.style.minHeight && card.style.minHeight !== 'auto') {
+          card.style.minHeight = 'auto';
+        }
+      });
+    }
+    
     // Execute any inline scripts in the loaded content first
     const scripts = this.contentContainer.querySelectorAll('script');
     scripts.forEach(oldScript => {
