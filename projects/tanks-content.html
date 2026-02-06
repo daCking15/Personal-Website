@@ -11,12 +11,12 @@
       <div class="carousel-inner" style="transition: height 0.5s ease-in-out;">
         <div class="carousel-item active" style="height: 100%;">
           <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
-            <img src="assets/Tanks3D.png" alt="Tanks 3D" class="d-block w-100 img-fluid" style="max-height: 60vh; object-fit: contain;">
+            <img src="assets/Tanks3D.png" alt="Tanks 3D" class="d-block w-100 img-fluid" style="object-fit: contain;">
           </div>
         </div>
         <div class="carousel-item" style="height: 100%;">
           <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
-            <img src="assets/Tanks 3D Controls.jpg" alt="Tanks 3D Controls" class="d-block w-100 img-fluid" style="max-height: 60vh; object-fit: contain;">
+            <img src="assets/Tanks 3D Controls.jpg" alt="Tanks 3D Controls" class="d-block w-100 img-fluid" style="object-fit: contain;">
           </div>
         </div>
         <div class="carousel-item" style="height: 100%;">
@@ -197,10 +197,8 @@
         }
       }
       
-      // Calculate the actual displayed height considering max-height constraint
+      // Calculate the actual displayed height
       const containerWidth = carouselInner.offsetWidth;
-      const maxHeightVh = 60; // 60vh
-      const maxHeightPx = (window.innerHeight * maxHeightVh) / 100;
       
       // Get the black background div padding (2rem = 32px on each side)
       const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || carousel.parentElement;
@@ -249,8 +247,7 @@
         
         if (imgWidth > 0 && imgHeight > 0) {
           const aspectRatio = imgWidth / imgHeight;
-          const heightAtFullWidth = containerWidth / aspectRatio;
-          finalHeight = Math.min(heightAtFullWidth, maxHeightPx);
+          finalHeight = containerWidth / aspectRatio;
         } else {
           // Fallback: wait for image to load
           return;
@@ -305,8 +302,6 @@
           }
           
           const containerWidth = carouselInner.offsetWidth;
-          const maxHeightVh = 60;
-          const maxHeightPx = (window.innerHeight * maxHeightVh) / 100;
           
           // Get the black background div padding (2rem = 32px on each side)
           const blackBackgroundDiv = carousel.closest('[style*="background-color: #000000"]') || carousel.parentElement;
@@ -326,13 +321,9 @@
             // Calculate video content height at available width
             const videoContentHeight = availableWidth / videoAspectRatio;
             
-            // Constrain by max height minus top/bottom padding
-            const maxVideoContentHeight = maxHeightPx - (padding * 2);
-            const constrainedVideoHeight = Math.min(videoContentHeight, maxVideoContentHeight);
-            
             // Video controls add extra height
             const estimatedControlsHeight = 48;
-            finalHeight = constrainedVideoHeight + estimatedControlsHeight + (padding * 2);
+            finalHeight = videoContentHeight + estimatedControlsHeight + (padding * 2);
           } else {
             // For images, use natural dimensions to calculate proper height
             const imgWidth = targetMedia.naturalWidth || targetMedia.width || containerWidth;
@@ -340,8 +331,7 @@
             
             if (imgWidth > 0 && imgHeight > 0) {
               const aspectRatio = imgWidth / imgHeight;
-              const heightAtFullWidth = containerWidth / aspectRatio;
-              finalHeight = Math.min(heightAtFullWidth, maxHeightPx);
+              finalHeight = containerWidth / aspectRatio;
             }
           }
           
