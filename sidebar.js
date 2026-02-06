@@ -47,6 +47,11 @@ function loadSidebar(currentProjectId = null) {
           
           // Debug: Log to verify icons are being added
           console.log('Icons added to sidebar:', projectsList.children.length, 'items');
+          
+          // Toggle w-100 class based on screen size after sidebar loads
+          if (typeof router !== 'undefined' && router.toggleProjectListWidth) {
+            router.toggleProjectListWidth();
+          }
         }
       }
     })

@@ -44,10 +44,12 @@ const router = {
     // Handle window resize/orientation change for mobile project cards
     window.addEventListener('resize', () => {
       this.adjustProjectCardsForMobile();
+      this.toggleProjectListWidth();
     });
     
     // Initial adjustment
     this.adjustProjectCardsForMobile();
+    this.toggleProjectListWidth();
   },
   
   adjustProjectCardsForMobile() {
@@ -76,6 +78,19 @@ const router = {
         projectsContainer.style.marginTop = '0';
       }
     }
+  },
+  
+  toggleProjectListWidth() {
+    const projectListItems = document.querySelectorAll('.project-list-item');
+    const isDesktop = window.innerWidth >= 768;
+    
+    projectListItems.forEach(item => {
+      if (isDesktop) {
+        item.classList.add('w-100');
+      } else {
+        item.classList.remove('w-100');
+      }
+    });
   },
   
   navigate(route) {
@@ -132,6 +147,9 @@ const router = {
       
       // Update active link in sidebar
       this.updateActiveLink(route);
+      
+      // Toggle project list width based on screen size
+      this.toggleProjectListWidth();
       
       // Scroll to top
       this.contentContainer.parentElement.scrollTop = 0;
