@@ -1,3 +1,5 @@
+console.log("Test");
+
 // Bootstrap Icons for mobile navigation
 const iconClasses = {
   home: 'bi-house-fill',
@@ -35,11 +37,11 @@ function loadSidebar(currentProjectId = null) {
         // After loading sidebar, populate projects list with router links
         const projectsList = document.getElementById('projects-list');
         if (projectsList) {
-          const homeLink = `<li class="mb-2 project-list-item"><a href="#" data-route="home" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${currentProjectId === null ? 'active' : ''}" title="Home"><i class="bi ${iconClasses.home} mobile-icon"></i><span class="desktop-text">Home</span></a></li>`;
+          const homeLink = `<li class="mb-2 project-list-item"><a href="#" data-route="home" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${currentProjectId === null ? 'active' : ''}" title="Home"><i class="bi ${iconClasses.home} mobile-icon d-md-none"></i><span class="desktop-text">Home</span></a></li>`;
           const projectLinks = projectsNavData.map(project => {
             const activeClass = currentProjectId === project.id ? 'active' : '';
             const iconClass = iconClasses[project.iconKey] || iconClasses.star; // Fallback icon
-            return `<li class="mb-2 project-list-item"><a href="#" data-route="${project.id}" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${activeClass}" title="${project.name}"><i class="bi ${iconClass} mobile-icon"></i><span class="desktop-text">${project.name}</span></a></li>`;
+            return `<li class="mb-2 project-list-item"><a href="#" data-route="${project.id}" class="project-link text-decoration-none text-muted d-block text-center py-2 rounded ${activeClass}" title="${project.name}"><i class="bi ${iconClass} mobile-icon d-md-none"></i><span class="desktop-text">${project.name}</span></a></li>`;
           }).join('');
           projectsList.innerHTML = homeLink + projectLinks;
           
