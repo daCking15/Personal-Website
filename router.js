@@ -191,6 +191,7 @@ const router = {
   
   async loadProjectContent(projectId) {
     const projectMap = {
+      'project-snowmap': 'projects/snowmap-content.html',
       'project-tanks': 'projects/tanks-content.html',
       'project-mariam': 'projects/mariam-content.html',
       'project-mirror': 'projects/mirror-content.html',

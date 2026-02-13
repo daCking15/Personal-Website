@@ -3,6 +3,7 @@ console.log("Test");
 // Bootstrap Icons for mobile navigation
 const iconClasses = {
   home: 'bi-house-fill',
+  snow: 'bi-snow2',
   controller: 'bi-controller',
   eye: 'bi-eye-fill',
   camera: 'bi-camera-fill',
@@ -15,6 +16,7 @@ const iconClasses = {
 
 // Sidebar navigation data and functions
 const projectsNavData = [
+  { id: 'project-snowmap', name: 'Snow Map', fileName: 'projects/snowmap.html', iconKey: 'snow' },
   { id: 'project-tanks', name: 'Tanks 3D', fileName: 'projects/tanks.html', iconKey: 'controller' },
   { id: 'project-mariam', name: 'Eyes of Mariam', fileName: 'projects/mariam.html', iconKey: 'eye' },
   { id: 'project-mirror', name: 'Interactive Mirror', fileName: 'projects/mirror.html', iconKey: 'camera' },

@@ -1,6 +1,18 @@
 // Projects data - single source of truth
 const projectsData = [
   {
+    id: 'project-snowmap',
+    name: 'Snow Map',
+    title: 'Snow Map',
+    image: 'assets/Snow-Map.png',
+    imageAlt: 'Snow Map',
+    description: 'Compare ski resort snow totals in real time.',
+    links: [
+      { text: 'Snow Map', url: 'https://dacking15.github.io/Snow-Map/' }
+    ],
+    disabled: false
+  },
+  {
     id: 'project-tanks',
     name: 'Tanks 3D',
     title: 'Tanks 3D',
